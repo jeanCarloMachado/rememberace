@@ -30,7 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.insertItem(quitItem, at: 0)
 
         let getOneItem = NSMenuItem()
-        getOneItem.title = "Give me a quote"
+        getOneItem.title = "Show one"
         getOneItem.action = #selector(showQuote(_:))
         menu.insertItem(getOneItem, at: 0)
 
