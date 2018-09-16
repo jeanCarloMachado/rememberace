@@ -11,10 +11,12 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    @IBOutlet weak var notificationWindow: NSWindow!
+    @IBOutlet weak var notificationContent: NSTextField!
+    
     let statusBar = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-
+    func applicationDidFinishLaunching(_ aNotification: Notification) { 
         let icon = NSImage(named: NSImage.Name(rawValue: "statusIcon"))
         icon?.isTemplate = true
         statusBar.image = icon
@@ -45,10 +47,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func showQuote(_ obj: NSMenuItem) {
         let result = "bash -c 'source /Users/jeanmachado/.bashrc && /Users/jeanmachado/projects/rememberRandom/getRemember.sh'".run()
 
-        var notification = NSUserNotification()
-        notification.informativeText = result
-        notification.soundName = NSUserNotificationDefaultSoundName
-        NSUserNotificationCenter.default.deliver(notification)
+        notificationContent.stringValue = result!
+        notificationWindow.orderFrontRegardless()
+
+        // var notification = NSUserNotification()
+        // notification.informativeText = result
+        // notification.soundName = NSUserNotificationDefaultSoundName
+        // NSUserNotificationCenter.default.deliver(notification)
     }
 
 
