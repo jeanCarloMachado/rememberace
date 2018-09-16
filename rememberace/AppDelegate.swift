@@ -11,17 +11,29 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    @IBOutlet weak var window: NSWindow!
-
+    let statusBar = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+
+        let icon = NSImage(named: NSImage.Name(rawValue: "statusIcon"))
+        icon?.isTemplate = true
+        statusBar.image = icon
+
+        let menu = NSMenu()
+        menu.autoenablesItems = true
+        let quitItem = NSMenuItem()
+        quitItem.title = "Quit"
+        quitItem.action = #selector(quit(_:))
+        menu.insertItem(quitItem, at: 0)
+        statusBar.menu = menu
+    }
+
+    @objc func quit(_ obj: NSMenuItem) {
+        NSApplication.shared.terminate(self)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
     }
-
 
 }
 
